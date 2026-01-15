@@ -1,0 +1,5 @@
+<div *ngFor="let toast of toasts"
+    [ngStyle]="{'background-color': TOAST_COLORS[toast.type || ToastType.Info]}"
+    class="toast">
+    {{ toast.message }}
+</div>

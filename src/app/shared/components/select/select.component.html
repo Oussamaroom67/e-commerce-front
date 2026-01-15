@@ -1,0 +1,7 @@
+<label for="" class="my-1">{{label}}</label>
+<select class="form-control" (change)="onChange($event)" required>
+    <option value="all">All</option>
+    @for(option of options;track $index){
+        <option value="{{option}}" >{{option}}</option>
+    }
+</select>

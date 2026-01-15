@@ -1,0 +1,13 @@
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  margin-bottom: 10px; // ✅ Pour espacer les toasts empilés
+  padding: 12px 20px;
+  border-radius: 8px;
+  color: white;
+  opacity: 0.9;
+  transition: opacity 0.5s, transform 0.3s;
+  z-index: 9999; // Important pour être au-dessus de tout
+  display: block !important;
+}
