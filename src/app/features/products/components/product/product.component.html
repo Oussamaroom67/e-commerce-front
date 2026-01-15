@@ -1,0 +1,30 @@
+<div class="item">
+    <div class="details" routerLink="/details/{{product.id}}">
+        <img src="{{product.image}}" alt="{{product.title}}" >
+        <div class="body">
+            <h4>{{product.title}}</h4>
+            <p>{{product.description}}</p>
+        </div>
+    </div>
+    <div class="px-3 mb-2 d-flex justify-content-between align-items-center">
+        <button class="btn btn-primary" *ngIf="showAdd" (click)="showAdd=false">Add To Cart</button>
+        <div class="quantity-control" *ngIf="!showAdd">
+            <button class="btn-quantity minus"  (click)="decreaseQuantity()" [disabled]="quantity<=0">
+                <span class="line"></span>
+            </button>
+            <input 
+                type="number" 
+                class="quantity-input" 
+                [(ngModel)]="quantity" 
+                min="1" 
+                max="99"
+            >
+            <button class="btn-quantity plus" (click)="increaseQuantity()">
+                <span class="line vertical"></span>
+                <span class="line horizontal"></span>
+            </button>
+            <button class="btn btn-success btn-sm ms-2" (click)="notifyAddTocart(product)">Add</button>
+        </div>
+        <span class="price">{{product.price}} L.E</span>
+    </div>
+</div>

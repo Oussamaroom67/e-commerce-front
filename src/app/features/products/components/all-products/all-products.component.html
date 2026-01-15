@@ -1,0 +1,13 @@
+<div class="box mt-5">
+    <div class="my-4 w-25">
+        <app-select [options]="categories()" label="Category" (selectedValue)="getByCategory($event)"></app-select>
+    </div>    
+    <div class="row" *ngIf="!loading">
+        @for(product of filtredProducts;track product.id){
+        <div class="col-md-3 col-sm-12">
+            <app-product [product]="product" (addToCart)="addProductToLocalStorage($event)"></app-product>
+        </div>
+        }
+    </div>
+    <app-spinner class="w-100 d-flex justify-content-center" *ngIf="loading"></app-spinner>
+</div>
