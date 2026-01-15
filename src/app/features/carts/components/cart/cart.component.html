@@ -1,0 +1,70 @@
+<div class="cartBox">
+  <h1 class="text-danger">Shopping Cart</h1>
+
+  <div class="headCart">
+    <p class="lead">
+      You have <label class="text-danger">{{sizeCart}}</label> item in your cart
+    </p>
+    <span class="text-danger card-header" (click)="clearCart()">Clear Shopping Cart</span>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Name</th>
+        <th>Price</th>
+        <th style="width: 25%;">Quantity</th>
+        <th>Total</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+    @for(item of cartItems;track item.product.id;let i=$index){
+        <tr>
+            <td>
+            <img src="{{item.product.image}}" alt="{{item.product.image}}">
+            </td>
+            <td>{{item.product.title}}</td>
+            <td>  {{ item.product.price != null 
+                    ? (item.product.price | number:'1.2-2') 
+                    : '0.00' 
+                    }} L.E</td>
+            <td>
+            <div class="quantity">
+                <button class="btn btn-dark" (click)="decreaseQuantity(i)" [disabled]="item.quantity<1">-</button>
+                <input class="form-control" type="number" min="0" [(ngModel)]="item.quantity" (change)="updateQuantity($event,i)">
+                <button class="btn btn-dark" (click)="increaseQuantity(i)">+</button>
+            </div>
+            </td>
+            <td>{{item.quantity * item.product.price !== null ? 
+                    (item.quantity * item.product.price | number:'1.2-2')
+                    : '0.00'
+                 }} L.E</td>
+            <td>
+            <button class="btn btn-danger" (click)="deleteProductFromCart(item)">Delete</button>
+            </td>
+      </tr>
+    }
+
+    </tbody>
+
+    <tfoot>
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th>Total : {{totalPrice | number:'1.2-2'}} L.E</th>
+        <th>
+          <button class="btn btn-success" (click)="submitCard()">Order Now</button>
+        </th>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<div class="alert alert-success" role="alert">
+  <strong>Well done!</strong> Your Order is Successfully Send
+</div>
